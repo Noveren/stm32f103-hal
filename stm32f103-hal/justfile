@@ -1,0 +1,16 @@
+
+# cargo rustc --example blinky -- --emit asm
+
+root  := "./target"
+
+default:
+    just --list
+
+set positional-arguments
+
+example name mode:
+    cargo objcopy --example {{name}} {{ if mode == "-r" {"--release"} else {""} }} -- -O binary {{root}}/{{name + ".bin"}}
+    rust-size {{root}}/"thumbv7m-none-eabi"/{{ if mode == "-r" {"release"} else {"debug"} }}/{{"examples"}}/{{name}}
+
+asm name mode:
+    cargo rustc --example {{name}} {{ if mode == "-r" {"--release"} else {""} }} -- --emit asm

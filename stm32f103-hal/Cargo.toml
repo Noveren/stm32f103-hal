@@ -1,0 +1,20 @@
+[package]
+name = "stm32f103-hal"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies.cortex-m]
+version = "0.7.7"
+
+[dependencies.cortex-m-rt]
+version = "0.7.3"
+
+[dependencies.fugit]
+version = "0.3.6"
+
+[dependencies.stm32f103]
+path = "../stm32f103"
+features = ["rt", "critical-section"]
+
+[[example]]
+name = "blinky"
